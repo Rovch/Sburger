@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Welcome to Crappy burgers</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Available Burgers</h2>
+      {{#each burgers}} {{#unless this.Eaten}}
+      <div>
+        {{this.id}}. {{this.burger_name}}
+      </div>
+      <form id="update" action="/burgers/toDelete/{{this.id}}" method="POST">
+        <input type="hidden" name="toDelete" value="true">
+        <button class="btn btn-dark" type="submit">Eat it!</button>
+      </form>
+
+      {{/unless}} {{/each}}
+    </div>
+
+    <div class="col-md-6">
+      <h2>Burgers Eaten!</h2>
+      {{#each burgers}} {{#if this.Eaten}}
+      <div>
+        {{this.id}}. {{this.burger_name}}
+      </div>
+      {{/if}} {{/each}}
+    </div>
+  </div>
+
+  <h2>Enter a burger you want to eat then click "Submit"</h2>
+  <form id="add" action="/burgers/add" method="POST">
+    <textarea name="burger_name"></textarea>
+    <button class="btn btn-warning" type="submit">Submit</button>
+  </form>
+
+</div>
