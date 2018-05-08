@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const connection = require("./config/connection.js")
+const connection = require("./config/config.json")
 const routes = require("./controllers/burgers_controller.js")
+
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -18,7 +19,15 @@ app.set("view engine", "handlebars");
 
 // =============================================================
 var PORT = 3030;
-app.listen(process.env.PORT|| PORT, function () {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
-});
+// app.listen(process.env.PORT|| PORT, function () {
+//   // Log (server-side) when our server has started
+//   console.log("Server listening on: http://localhost:" + PORT);
+// });
+
+var db = require("./models")
+
+db.sequelize.sync({force:true}).then(function () {
+  app.listen( proccess.env.PORT || PORT, function () {
+    console.log("App listening on PORT " + PORT);
+  });
+})
