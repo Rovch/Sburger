@@ -27,7 +27,7 @@ var PORT = 3030;
 var db = require("./models")
 
 db.sequelize.sync({force:true}).then(function () {
-  app.listen( proccess.env.PORT || PORT, function () {
+  app.listen( process.env.PORT || PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 })
