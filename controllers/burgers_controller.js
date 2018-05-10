@@ -17,25 +17,28 @@ router.get("/burgers", function (req, res) {
 
 router.post("/burgers/add", function (req, res) {
   db.burgers.create({
-    text: req.body.text,
-    complete: req.body.flag
+    text: req.body.text
   }).then(function (data) {
     res.redirect("/burgers")
-  });
+  })
 })
+
 
 router.post('/burgers/toDelete/:id', function (req, res) {
 
   db.burgers.update({
     flag: 1,
-  }, {
+  },
+    {
       where: {
         id: req.params.id
       }
-    }).then(function(data){
+    }).then(function (data) {
       res.redirect("/burgers");
     })
 })
+
+
 
 
 module.exports = router;
